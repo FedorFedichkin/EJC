@@ -90,7 +90,7 @@ public class MainLogic {
         return true;
     }
 
-    boolean checkIfHit(int x, int y) {
+    boolean checkIfBoat(int x, int y) {
         return this.fieldWithData[y - 1][x - 1] == 'b';
     }
 
@@ -179,6 +179,12 @@ public class MainLogic {
             for (int j = 0; j < FIELD_SIZE; j++) {
                 if (this.demonstratedField[i][j] == 0x20DE) {
                     System.out.print(" " + this.demonstratedField[i][j] + " ");
+                } else if (this.demonstratedField[i][j] == 0x2757) {
+                    System.out.print("\u2008" + this.demonstratedField[i][j] + "\u2008");
+                } else if (this.demonstratedField[i][j] == 0x2715) {
+                    System.out.print("\u200A" + this.demonstratedField[i][j] + "\u2009");
+                } else if (this.demonstratedField[i][j] == 0x2620) {
+                    System.out.print("\u200A" + this.demonstratedField[i][j] + "\u200A");
                 } else {
                     System.out.print(this.demonstratedField[i][j]);
                 }

@@ -26,15 +26,21 @@ public class Initialisation {
         int x;
         int y;
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            for (int i = 0; i < 50; i++) {
+            int loopCount = 50;
+            for (int i = 0; i < loopCount; i++) {
                 System.out.println();
                 System.out.print("X: ");
                 x = Integer.parseInt(reader.readLine());
                 System.out.print("Y: ");
                 y = Integer.parseInt(reader.readLine());
                 System.out.println();
+                if (x > 10 || y > 10 || x < 1 || y < 1){
+                    loopCount++;
+                    System.out.println("The value you entered is incorrect. Try again.");
+                    continue;
+                }
 
-                if (mainLogic.checkIfHit(x, y)) {
+                if (mainLogic.checkIfBoat(x, y)) {
                     mainLogic.markFieldAsHit(x, y);
                     mainLogic.checkIfDestroyed(x, y);
                 } else {
