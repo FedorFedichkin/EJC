@@ -7,25 +7,25 @@ import java.io.InputStreamReader;
 public class Initialisation {
     private static MainLogic mainLogic = new MainLogic();
 
-    public static void battleInit(){
-        mainLogic.generateEmptyField();
+    static void battleInit() {
+        mainLogic.generateEmptyFields();
         putAllBoatsOnField();
         mainLogic.showCurrentStateOfFieldInConsole();
         showGreeting();
         launchGameLoop();
     }
 
-    public static void showGreeting(){
+    private static void showGreeting() {
         System.out.println();
         System.out.println("Welcome to the Sea Battle! You have 50 attempts to destroy 10 boats.");
-        System.out.println("To hit/destroy a boat you should enter horizontal coordinate X (1 <= X <= 10), " +
+        System.out.println("To shoot you should enter horizontal coordinate X (1 <= X <= 10), " +
                 "press \"Enter\", then enter vertical coordinate Y (1 <= Y <= 10) and press \"Enter\" again.");
     }
 
-    public static void launchGameLoop(){
+    private static void launchGameLoop() {
         int x;
         int y;
-        try(BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))){
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             for (int i = 0; i < 50; i++) {
                 System.out.println();
                 System.out.print("X: ");
@@ -34,7 +34,7 @@ public class Initialisation {
                 y = Integer.parseInt(reader.readLine());
                 System.out.println();
 
-                if (mainLogic.checkIfHit(x, y)){
+                if (mainLogic.checkIfHit(x, y)) {
                     mainLogic.markFieldAsHit(x, y);
                     mainLogic.checkIfDestroyed(x, y);
                 } else {
@@ -47,7 +47,7 @@ public class Initialisation {
         }
     }
 
-    public static void putAllBoatsOnField(){
+    private static void putAllBoatsOnField() {
         mainLogic.putBoatOnField(4);
 
         mainLogic.putBoatOnField(3);
