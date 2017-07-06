@@ -91,7 +91,7 @@ public class MainLogic {
     }
 
     boolean checkIfBoat(int x, int y) {
-        return this.fieldWithData[y - 1][x - 1] == 'b';
+        return this.fieldWithData[y - 1][x - 1] == 'b' || this.fieldWithData[y - 1][x - 1] == 0x2757;
     }
 
     boolean checkIfDestroyed(int x, int y) {
