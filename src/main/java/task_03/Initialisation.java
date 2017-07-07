@@ -3,10 +3,17 @@ package main.java.task_03;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
+/**
+ * This class is for game initialization and further use of MainLogic class.
+ */
 public class Initialisation {
     private static MainLogic mainLogic = new MainLogic();
 
+    /**
+     * Initialization happens here.
+     */
     static void battleInit() {
         mainLogic.generateEmptyFields();
         putAllBoatsOnField();
@@ -15,6 +22,9 @@ public class Initialisation {
         launchGameLoop();
     }
 
+    /**
+     * Showing greeting message.
+     */
     private static void showGreeting() {
         System.out.println();
         System.out.println("Welcome to the Sea Battle! You have 50 attempts to destroy 10 boats.");
@@ -22,24 +32,40 @@ public class Initialisation {
                 "press \"Enter\", then enter vertical coordinate Y (1 <= Y <= 10) and press \"Enter\" again.");
     }
 
+    /**
+     * This method is launching loop where interaction with player happens.
+     */
     private static void launchGameLoop() {
         int x;
         int y;
+        List<Boat> boats = mainLogic.getBoats();
+        int boatsQuantity = boats.size();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            int loopCount = 50;
-            for (int i = 0; i < loopCount; i++) {
+            int loopCount = 10;
+            int i = 0;
+            do {
+                i++;
+                if (i == loopCount + 1) {
+                    System.out.println("You failed this game. Try again!");
+                    break;
+                }
                 System.out.println();
+                System.out.println("This is your " + i + " attempt.");
                 System.out.print("X: ");
                 x = Integer.parseInt(reader.readLine());
-                System.out.print("Y: ");
-                y = Integer.parseInt(reader.readLine());
-                System.out.println();
-                if (x > 10 || y > 10 || x < 1 || y < 1){
-                    loopCount++;
+                if (x > 10 || x < 1) {
+                    i--;
                     System.out.println("The value you entered is incorrect. Try again.");
                     continue;
                 }
-
+                System.out.print("Y: ");
+                y = Integer.parseInt(reader.readLine());
+                System.out.println();
+                if (y > 10 || y < 1) {
+                    i--;
+                    System.out.println("The value you entered is incorrect. Try again.");
+                    continue;
+                }
                 if (mainLogic.checkIfBoat(x, y)) {
                     mainLogic.markFieldAsHit(x, y);
                     mainLogic.checkIfDestroyed(x, y);
@@ -47,12 +73,26 @@ public class Initialisation {
                     mainLogic.markFieldAsEmpty(x, y);
                 }
                 mainLogic.showCurrentStateOfFieldInConsole();
-            }
+                int counter = 0;
+                for (Boat boat : boats) {
+                    if (!boat.isAlive()) {
+                        counter++;
+                    }
+                }
+                if (counter == boatsQuantity) {
+                    System.out.println("It is victory! Congratulations!");
+                    System.out.println("Number of your attempts is: " + i);
+                    break;
+                }
+            } while (i < loopCount + 2);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Choose boats of different size (from 1 to 4 cells) to put on the field.
+     */
     private static void putAllBoatsOnField() {
         mainLogic.putBoatOnField(4);
 

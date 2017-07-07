@@ -1,5 +1,8 @@
 package main.java.task_03;
 
+/*
+* Class is made for boats creation and conserving its parameters.
+* */
 public class Boat {
     private int deckQuantity;
     private int xUpperLeftCoordinate;
@@ -8,7 +11,7 @@ public class Boat {
     private boolean isAlive;
 
     public Boat(int deckQuantity, int xUpperLeftCoordinate, int yUpperLeftCoordinate,
-         boolean isBoatHorizontal, boolean isAlive) {
+                boolean isBoatHorizontal, boolean isAlive) {
         this.deckQuantity = deckQuantity;
         this.xUpperLeftCoordinate = xUpperLeftCoordinate;
         this.yUpperLeftCoordinate = yUpperLeftCoordinate;
