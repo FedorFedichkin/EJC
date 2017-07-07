@@ -23,13 +23,17 @@ public class Initialisation {
     }
 
     /**
-     * Showing greeting message.
+     * Showing greeting message, game rules and a legend.
      */
     private static void showGreeting() {
         System.out.println();
         System.out.println("Welcome to the Sea Battle! You have 50 attempts to destroy 10 boats.");
         System.out.println("To shoot you should enter horizontal coordinate X (1 <= X <= 10), " +
                 "press \"Enter\", then enter vertical coordinate Y (1 <= Y <= 10) and press \"Enter\" again.");
+        System.out.println(" " + "\u20DE" + "  - is a cell of a field");
+        System.out.println("\u200A" + "\u2715" + "\u2009" + " - an empty field");
+        System.out.println("\u2008" + "\u2757" + "\u2008" + " - a hit boat");
+        System.out.println("\u200A" + "\u2620" + "\u200A" + " - destroyed boat");
     }
 
     /**
