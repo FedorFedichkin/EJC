@@ -1,26 +1,22 @@
 package main.java.task_04;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 public class WorkWithStrings2 {
     public static void main(String[] args) {
-        try(BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))){
-            String s1 = reader.readLine();
-            String s2 = s1;
-            s2 = s2.replaceAll(" ", "");
-            System.out.println(s2);
-            StringBuilder s3 = new StringBuilder(s2);
-            StringBuilder s4 = s3.reverse();
-            s3 = new StringBuilder(s2);
-            if (s3.toString().equals(s4.toString())){
-                System.out.println(s1 + " is a polyndrom!");
+        String[] strings = new String[] {"АРГЕНТИНА МАНИТ НЕГРА", "ПОТ КАК ПОТОП", "А РОЗА УПАЛА НА ЛАПУ АЗОРА"};
+        for (String string : strings) {
+            if (isPolyndrom(string)) {
+                System.out.println(string + " is a polyndrom!");
             } else {
-                System.out.println(s1 + " is not a polyndrom.");
+                System.out.println(string + " is not a polyndrom.");
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+    }
+
+    private static boolean isPolyndrom(String string){
+        String s = string.replaceAll(" ", "");
+        StringBuilder s1 = new StringBuilder(s);
+        StringBuilder s2 = s1.reverse();
+        s1 = new StringBuilder(s);
+        return (s1.toString().equals(s2.toString()));
     }
 }
