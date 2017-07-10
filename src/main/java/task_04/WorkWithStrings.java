@@ -7,15 +7,19 @@ import java.io.InputStreamReader;
 public class WorkWithStrings {
     public static void main(String[] args) {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            String s1 = reader.readLine();
-            char[] myCharArray = s1.toCharArray();
-            for (int i = 0; i < myCharArray.length; i++) {
-                if (i % 2 == 0) {
-                    System.out.print(myCharArray[i] + " ");
-                }
-            }
+            String string = reader.readLine();
+            showOddCharsFromString(string);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void showOddCharsFromString(String string){
+        char[] myCharArray = string.toCharArray();
+        for (int i = 0; i < myCharArray.length; i++) {
+            if (i % 2 == 0) {
+                System.out.print(myCharArray[i] + " ");
+            }
         }
     }
 }

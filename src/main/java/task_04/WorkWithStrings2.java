@@ -8,6 +8,7 @@ public class WorkWithStrings2 {
         }
     }
 
+
     private static boolean isPalindrome(String s){
         String string = s.replaceAll(" ", "");
         StringBuilder stringBuilder = new StringBuilder(string).reverse();
