@@ -14,11 +14,11 @@ public class WorkWithStrings {
         }
     }
 
-    private static void showOddCharsFromString(String string) {
-        char[] myCharArray = string.toCharArray();
-        for (int i = 0; i < myCharArray.length; i++) {
+    private static void showOddCharsFromString(String stringToGiveOddChars) {
+        char[] charArrayFromGivenString = stringToGiveOddChars.toCharArray();
+        for (int i = 0; i < charArrayFromGivenString.length; i++) {
             if (i % 2 == 0) {
-                System.out.print(myCharArray[i] + " ");
+                System.out.print(charArrayFromGivenString[i] + " ");
             }
         }
     }
