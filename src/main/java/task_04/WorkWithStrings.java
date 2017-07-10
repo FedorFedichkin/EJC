@@ -14,7 +14,7 @@ public class WorkWithStrings {
         }
     }
 
-    private static void showOddCharsFromString(String string){
+    private static void showOddCharsFromString(String string) {
         char[] myCharArray = string.toCharArray();
         for (int i = 0; i < myCharArray.length; i++) {
             if (i % 2 == 0) {
