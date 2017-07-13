@@ -9,6 +9,11 @@ import java.util.Random;
 * */
 public class MainLogic {
     private final static int FIELD_SIZE = 10;
+    private static final int DESTROYED_BOAT_FIELD = 0x2620;
+    private static final int INITIAL_FIELD = 0x20DE;
+    private static final int HIT_BOAT_FIELD = 0x2757;
+    private static final int EMPTY_FIELD = 0x2715;
+    private static final char BOAT_FIELD = 'b';
     private char[][] fieldWithData = new char[FIELD_SIZE][FIELD_SIZE];
     private char[][] demonstratedField = new char[FIELD_SIZE][FIELD_SIZE];
     private List<Boat> boats = new ArrayList<>();
@@ -19,8 +24,8 @@ public class MainLogic {
     void generateEmptyFields() {
         for (int i = 0; i < FIELD_SIZE; i++) {
             for (int j = 0; j < FIELD_SIZE; j++) {
-                this.fieldWithData[i][j] = 0x20DE;
-                this.demonstratedField[i][j] = 0x20DE;
+                this.fieldWithData[i][j] = INITIAL_FIELD;
+                this.demonstratedField[i][j] = INITIAL_FIELD;
             }
         }
     }
@@ -60,18 +65,17 @@ public class MainLogic {
                 xUpperLeft = random.nextInt(maxNumberOfBoatDecks) + 1;
                 yUpperLeft = random.nextInt(FIELD_SIZE - deckQuantity - 1) + 1;
             }
-
         } while (!isPossibleToPutBoatOnField(xUpperLeft, yUpperLeft, deckQuantity, isBoatHorizontal));
 
         boats.add(new Boat(deckQuantity, xUpperLeft, yUpperLeft, isBoatHorizontal, true));
 
         if (isBoatHorizontal) {
             for (int i = xUpperLeft; i < xUpperLeft + deckQuantity; i++) {
-                this.fieldWithData[yUpperLeft][i] = 'b';
+                this.fieldWithData[yUpperLeft][i] = BOAT_FIELD;
             }
         } else {
             for (int i = yUpperLeft; i < yUpperLeft + deckQuantity; i++) {
-                this.fieldWithData[i][xUpperLeft] = 'b';
+                this.fieldWithData[i][xUpperLeft] = BOAT_FIELD;
             }
         }
     }
@@ -94,7 +98,7 @@ public class MainLogic {
                 for (int i = 0; i < deckQuantity; i++) {
                     for (int j = xUpperLeftCoordinate - 1; j < xUpperLeftCoordinate + 2; j++) {
                         for (int k = yUpperLeftCoordinate - 1; k < yUpperLeftCoordinate + 2; k++) {
-                            if (k < FIELD_SIZE && (j + i) < FIELD_SIZE && this.fieldWithData[k][j + i] != 0x20DE)
+                            if (k < FIELD_SIZE && (j + i) < FIELD_SIZE && this.fieldWithData[k][j + i] != INITIAL_FIELD)
                                 return false;
                         }
                     }
@@ -107,7 +111,7 @@ public class MainLogic {
                 for (int i = 0; i < deckQuantity; i++) {
                     for (int j = xUpperLeftCoordinate - 1; j < xUpperLeftCoordinate + 2; j++) {
                         for (int k = yUpperLeftCoordinate - 1; k < yUpperLeftCoordinate + 2; k++) {
-                            if (j < FIELD_SIZE && (k + i) < FIELD_SIZE && this.fieldWithData[k + i][j] != 0x20DE)
+                            if (j < FIELD_SIZE && (k + i) < FIELD_SIZE && this.fieldWithData[k + i][j] != INITIAL_FIELD)
                                 return false;
                         }
                     }
@@ -117,11 +121,11 @@ public class MainLogic {
         return true;
     }
 
-    boolean checkIfBoat(int x, int y) {
-        return this.fieldWithData[y - 1][x - 1] == 'b' || this.fieldWithData[y - 1][x - 1] == 0x2757;
+    boolean checkIfBoat(int column, int row) {
+        return this.fieldWithData[row - 1][column - 1] == BOAT_FIELD || this.fieldWithData[row - 1][column - 1] == HIT_BOAT_FIELD;
     }
 
-    boolean checkIfDestroyed(int x, int y) {
+    boolean checkIfDestroyed(int column, int row) {
         int deckQuantity;
         boolean isBoatHorizontal;
         for (Boat boat : boats) {
@@ -135,22 +139,20 @@ public class MainLogic {
                     boolean isThisBoat = false;
 
                     for (int i = xUpperLeftCoordinate; i < xUpperLeftCoordinate + deckQuantity; i++) {
-                        if (fieldWithData[y - 1][i] == 0x2757) {
+                        if (fieldWithData[row - 1][i] == HIT_BOAT_FIELD) {
                             count++;
-                            if (fieldWithData[yUpperLeftCoordinate][i] == fieldWithData[y - 1][x - 1]) {
+                            if (fieldWithData[yUpperLeftCoordinate][i] == fieldWithData[row - 1][column - 1]) {
                                 isThisBoat = true;
                             }
                         }
                     }
-
                     if (isThisBoat && count == deckQuantity) {
                         boat.setAlive(false);
                         for (int i = 1; i <= deckQuantity; i++) {
-                            markFieldAsDestroyedBoat(xUpperLeftCoordinate + i, y);
+                            markFieldAsDestroyedBoat(xUpperLeftCoordinate + i, row);
                         }
                         return true;
                     }
-
                     if (isThisBoat && count < deckQuantity) {
                         return false;
                     }
@@ -161,22 +163,20 @@ public class MainLogic {
                     boolean isThisBoat = false;
 
                     for (int i = yUpperLeftCoordinate; i < yUpperLeftCoordinate + deckQuantity; i++) {
-                        if (fieldWithData[i][x - 1] == 0x2757) {
+                        if (fieldWithData[i][column - 1] == HIT_BOAT_FIELD) {
                             count++;
-                            if (fieldWithData[i][xUpperLeftCoordinate] == fieldWithData[y - 1][x - 1]) {
+                            if (fieldWithData[i][xUpperLeftCoordinate] == fieldWithData[row - 1][column - 1]) {
                                 isThisBoat = true;
                             }
                         }
                     }
-
                     if (isThisBoat && count == deckQuantity) {
                         boat.setAlive(false);
                         for (int i = 1; i <= deckQuantity; i++) {
-                            markFieldAsDestroyedBoat(x, yUpperLeftCoordinate + i);
+                            markFieldAsDestroyedBoat(column, yUpperLeftCoordinate + i);
                         }
                         return true;
                     }
-
                     if (isThisBoat && count < deckQuantity) {
                         return false;
                     }
@@ -186,38 +186,38 @@ public class MainLogic {
         return false;
     }
 
-    void markFieldAsHit(int x, int y) {
-        this.fieldWithData[y - 1][x - 1] = 0x2757;
-        this.demonstratedField[y - 1][x - 1] = 0x2757;
+    void markFieldAsHit(int column, int row) {
+        this.fieldWithData[row - 1][column - 1] = HIT_BOAT_FIELD;
+        this.demonstratedField[row - 1][column - 1] = HIT_BOAT_FIELD;
     }
 
-    void markFieldAsEmpty(int x, int y) {
-        if (this.fieldWithData[y - 1][x - 1] != 0x2757 && this.demonstratedField[y - 1][x - 1] != 0x2757
-                && this.fieldWithData[y - 1][x - 1] != 0x2620 && this.demonstratedField[y - 1][x - 1] != 0x2620) {
-            this.fieldWithData[y - 1][x - 1] = 0x2715;
-            this.demonstratedField[y - 1][x - 1] = 0x2715;
+    void markFieldAsEmpty(int column, int row) {
+        if (this.fieldWithData[row - 1][column - 1] != HIT_BOAT_FIELD && this.demonstratedField[row - 1][column - 1] != HIT_BOAT_FIELD
+                && this.fieldWithData[row - 1][column - 1] != DESTROYED_BOAT_FIELD && this.demonstratedField[row - 1][column - 1] != DESTROYED_BOAT_FIELD) {
+            this.fieldWithData[row - 1][column - 1] = EMPTY_FIELD;
+            this.demonstratedField[row - 1][column - 1] = EMPTY_FIELD;
         }
     }
 
-    private void markFieldAsDestroyedBoat(int x, int y) {
-        this.fieldWithData[y - 1][x - 1] = 0x2620;
-        this.demonstratedField[y - 1][x - 1] = 0x2620;
+    private void markFieldAsDestroyedBoat(int column, int row) {
+        this.fieldWithData[row - 1][column - 1] = DESTROYED_BOAT_FIELD;
+        this.demonstratedField[row - 1][column - 1] = DESTROYED_BOAT_FIELD;
     }
 
     void showCurrentStateOfFieldInConsole() {
         for (int i = 0; i < FIELD_SIZE; i++) {
             for (int j = 0; j < FIELD_SIZE; j++) {
                 switch (this.demonstratedField[i][j]) {
-                    case 0x20DE:
+                    case INITIAL_FIELD:
                         System.out.print(" " + this.demonstratedField[i][j] + " ");
                         break;
-                    case 0x2757:
+                    case HIT_BOAT_FIELD:
                         System.out.print("\u2008" + this.demonstratedField[i][j] + "\u2008");
                         break;
-                    case 0x2715:
+                    case EMPTY_FIELD:
                         System.out.print("\u200A" + this.demonstratedField[i][j] + "\u2009");
                         break;
-                    case 0x2620:
+                    case DESTROYED_BOAT_FIELD:
                         System.out.print("\u200A" + this.demonstratedField[i][j] + "\u200A");
                         break;
                     default:

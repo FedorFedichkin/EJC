@@ -40,13 +40,16 @@ public class Initialisation {
      * This method is launching loop where interaction with player happens.
      */
     private static void launchGameLoop() {
-        int x;
-        int y;
+        int column;
+        int row;
         List<Boat> boats = mainLogic.getBoats();
         int boatsQuantity = boats.size();
+        int numberOfAliveBoats;
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            int loopCount = 10;
+            int loopCount = 50;
             int i = 0;
+            String columnEnteredByUser;
+            String rowEnteredByUser;
             do {
                 i++;
                 if (i == loopCount + 1) {
@@ -56,25 +59,39 @@ public class Initialisation {
                 System.out.println();
                 System.out.println("This is your " + i + " attempt.");
                 System.out.print("X: ");
-                x = Integer.parseInt(reader.readLine());
-                if (x > 10 || x < 1) {
+                columnEnteredByUser = reader.readLine();
+                if (columnEnteredByUser.matches("[0-9]")) {
+                    column = Integer.parseInt(columnEnteredByUser);
+                } else {
+                    System.out.println("The entered value is incorrect. Try again!");
+                    i--;
+                    continue;
+                }
+                if (column > 10 || column < 1) {
                     i--;
                     System.out.println("The value you entered is incorrect. Try again.");
                     continue;
                 }
                 System.out.print("Y: ");
-                y = Integer.parseInt(reader.readLine());
+                rowEnteredByUser = reader.readLine();
+                if (rowEnteredByUser.matches("[0-9]")) {
+                    row = Integer.parseInt(rowEnteredByUser);
+                } else {
+                    System.out.println("The entered value is incorrect. Try again!");
+                    i--;
+                    continue;
+                }
                 System.out.println();
-                if (y > 10 || y < 1) {
+                if (row > 10 || row < 1) {
                     i--;
                     System.out.println("The value you entered is incorrect. Try again.");
                     continue;
                 }
-                if (mainLogic.checkIfBoat(x, y)) {
-                    mainLogic.markFieldAsHit(x, y);
-                    mainLogic.checkIfDestroyed(x, y);
+                if (mainLogic.checkIfBoat(column, row)) {
+                    mainLogic.markFieldAsHit(column, row);
+                    mainLogic.checkIfDestroyed(column, row);
                 } else {
-                    mainLogic.markFieldAsEmpty(x, y);
+                    mainLogic.markFieldAsEmpty(column, row);
                 }
                 mainLogic.showCurrentStateOfFieldInConsole();
                 int counter = 0;
@@ -83,8 +100,14 @@ public class Initialisation {
                         counter++;
                     }
                 }
+                numberOfAliveBoats = 10 - counter;
+                if (numberOfAliveBoats == 1){
+                    System.out.println(numberOfAliveBoats + " boat is still alive.");
+                } else {
+                    System.out.println(numberOfAliveBoats + " boats are still alive.");
+                }
                 if (counter == boatsQuantity) {
-                    System.out.println("It is victory! Congratulations!");
+                    System.out.println("It is a victory! Congratulations!");
                     System.out.println("Number of your attempts is: " + i);
                     break;
                 }
