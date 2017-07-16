@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 /*
-* This class is made for back-end calculations and interaction.
+* This class is made for back-end calculations, interaction and visualisation.
 * */
 public class MainLogic {
     private final static int FIELD_SIZE = 10;
@@ -19,7 +19,7 @@ public class MainLogic {
     private List<Boat> boats = new ArrayList<>();
 
     /**
-     * Generating two empty fields: fieldWithData is for storage of boats positions, demonstratedField is for showing to player.
+     * Generating two empty fields: fieldWithData is for storage of positions of boats, demonstratedField is for showing to player.
      */
     void generateEmptyFields() {
         for (int i = 0; i < FIELD_SIZE; i++) {
