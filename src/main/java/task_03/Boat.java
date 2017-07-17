@@ -5,26 +5,26 @@ package main.java.task_03;
 * */
 public class Boat {
     private int deckQuantity;
-    private int xUpperLeftCoordinate;
-    private int yUpperLeftCoordinate;
+    private int upperLeftCoordinateX;
+    private int upperLeftCoordinateY;
     private boolean isBoatHorizontal;
     private boolean isAlive;
 
-    public Boat(int deckQuantity, int xUpperLeftCoordinate, int yUpperLeftCoordinate,
+    public Boat(int deckQuantity, int upperLeftCoordinateX, int upperLeftCoordinateY,
                 boolean isBoatHorizontal, boolean isAlive) {
         this.deckQuantity = deckQuantity;
-        this.xUpperLeftCoordinate = xUpperLeftCoordinate;
-        this.yUpperLeftCoordinate = yUpperLeftCoordinate;
+        this.upperLeftCoordinateX = upperLeftCoordinateX;
+        this.upperLeftCoordinateY = upperLeftCoordinateY;
         this.isBoatHorizontal = isBoatHorizontal;
         this.isAlive = isAlive;
     }
 
-    public int getxUpperLeftCoordinate() {
-        return xUpperLeftCoordinate;
+    public int getUpperLeftCoordinateX() {
+        return upperLeftCoordinateX;
     }
 
-    public int getyUpperLeftCoordinate() {
-        return yUpperLeftCoordinate;
+    public int getUpperLeftCoordinateY() {
+        return upperLeftCoordinateY;
     }
 
     public int getDeckQuantity() {
