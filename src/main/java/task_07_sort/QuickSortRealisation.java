@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -12,7 +13,6 @@ import java.util.List;
  *
  * @author Fedor Fedichkin
  */
-
 public class QuickSortRealisation {
     private static List<Integer> listToSort = new ArrayList<>();
 
@@ -45,7 +45,7 @@ public class QuickSortRealisation {
         }
     }
 
-    private static void quickSort(int start, int end) {
+    public static void quickSort(int start, int end) {
         if (start >= end)
             return;
         int i = start, j = end;
@@ -58,7 +58,6 @@ public class QuickSortRealisation {
                 j--;
             }
             if (i < j) {
-
                 int temp = listToSort.get(i);
                 listToSort.set(i, listToSort.get(j));
                 listToSort.set(j, temp);
