@@ -1,4 +1,4 @@
-package main.java.task_06_threads;
+package task_06_threads;
 
 
 import java.io.BufferedReader;

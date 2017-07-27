@@ -1,4 +1,4 @@
-package main.java.task_04;
+package task_04;
 
 public class WorkWithStrings2 {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package main.java.task_01;
+package task_01;
 
 public class Main {
     public static void main(String[] args) {

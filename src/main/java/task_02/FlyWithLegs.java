@@ -1,4 +1,4 @@
-package main.java.task_02;
+package task_02;
 
 import java.util.Random;
 

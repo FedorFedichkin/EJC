@@ -1,4 +1,4 @@
-package main.java.task_03;
+package task_03;
 
 /**
 * Class is made for boats creation and conserving its parameters.

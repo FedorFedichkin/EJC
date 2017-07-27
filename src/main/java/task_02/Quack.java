@@ -1,4 +1,4 @@
-package main.java.task_02;
+package task_02;
 
 public class Quack implements QuackBehavior {
     @Override

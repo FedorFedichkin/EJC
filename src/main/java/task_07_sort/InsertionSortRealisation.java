@@ -1,4 +1,4 @@
-package main.java.task_07_sort;
+package task_07_sort;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,26 +12,29 @@ import java.util.Random;
  * @author Fedor Fedichkin
  */
 public class InsertionSortRealisation {
-    private static List<Integer> listToSort = new ArrayList<>();
 
     public static void main(String[] args) {
-        initializeArrayList();
+        List<Integer> listToSort;
+        InsertionSortRealisation insertionSortRealisation = new InsertionSortRealisation();
+        listToSort = insertionSortRealisation.initializeArrayList();
         System.out.println("Initial order of numbers:");
-        printArrayListToConsole();
-        insertionSort(listToSort);
+        insertionSortRealisation.printArrayListToConsole(listToSort);
+        listToSort = insertionSortRealisation.insertionSort(listToSort);
         System.out.println("Sorted list:");
-        printArrayListToConsole();
+        insertionSortRealisation.printArrayListToConsole(listToSort);
     }
 
-    private static void initializeArrayList() {
+    private List<Integer> initializeArrayList() {
+        List<Integer> listToSort = new ArrayList<>();
         Random random = new Random();
         int quantityOfNumbersInArrayList = 100;
         for (int i = 0; i < quantityOfNumbersInArrayList; i++) {
             listToSort.add(random.nextInt(1000));
         }
+        return listToSort;
     }
 
-    public static List<Integer> insertionSort(List<Integer> integerList) {
+    public List<Integer> insertionSort(List<Integer> integerList) {
         int i, j, newValue;
         for (i = 1; i < integerList.size(); i++) {
             newValue = integerList.get(i);
@@ -45,7 +48,7 @@ public class InsertionSortRealisation {
         return integerList;
     }
 
-    private static void printArrayListToConsole() {
+    private void printArrayListToConsole(List<Integer> listToSort) {
         for (Integer listValue : listToSort) {
             System.out.print(listValue + " ");
         }
