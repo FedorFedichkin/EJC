@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,6 +17,10 @@ import java.util.List;
 public class QuickSortRealisation {
     private static List<Integer> listToSort = new ArrayList<>();
 
+    public static void setListToSort(List<Integer> listToSort) {
+        QuickSortRealisation.listToSort = listToSort;
+    }
+
     public static void main(String[] args) {
         QuickSortRealisation quickSortRealisation = new QuickSortRealisation();
         quickSortRealisation.initializeArrayList();
@@ -26,7 +31,7 @@ public class QuickSortRealisation {
         quickSortRealisation.printArrayListToConsole();
     }
 
-    private void initializeArrayList() {
+    private List<Integer> initializeArrayList() {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             Integer valueFromConsole;
             String enteredLine;
@@ -44,6 +49,7 @@ public class QuickSortRealisation {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return listToSort;
     }
 
     public static void quickSort(int left, int right) {

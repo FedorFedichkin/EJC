@@ -1,7 +1,7 @@
+package task_07_sort;
 
 import org.junit.Assert;
 import org.junit.Test;
-import task_07_sort.InsertionSortRealisation;
 
 import java.util.*;
 

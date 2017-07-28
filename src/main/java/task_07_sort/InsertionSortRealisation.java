@@ -29,7 +29,7 @@ public class InsertionSortRealisation {
         Random random = new Random();
         int quantityOfNumbersInArrayList = 100;
         for (int i = 0; i < quantityOfNumbersInArrayList; i++) {
-            listToSort.add(random.nextInt(1000));
+            listToSort.add(random.nextInt(1001));
         }
         return listToSort;
     }

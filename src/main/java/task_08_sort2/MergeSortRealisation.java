@@ -39,7 +39,6 @@ public class MergeSortRealisation {
             int middle = (left + right) / 2;
             mergeSort(arrayToSort, left, middle);
             mergeSort(arrayToSort, middle, right);
-
             int length = right - left;
             int[] arrayBuffer = new int[length];
             int currentLeft = left;
