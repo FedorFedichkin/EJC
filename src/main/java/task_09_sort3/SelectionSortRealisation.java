@@ -7,10 +7,7 @@ public class SelectionSortRealisation {
 
     public static void main(String[] args) {
         SelectionSortRealisation bubbleSortRealisation = new SelectionSortRealisation();
-        Random random = new Random();
-        for (int i = 0; i < arrayToSort.length; i++) {
-            arrayToSort[i] = random.nextInt(999)+1;
-        }
+        bubbleSortRealisation.initialiseArray();
         System.out.println("Unsorted array:");
         bubbleSortRealisation.arrayToConsole(arrayToSort);
         bubbleSortRealisation.selectionSort(arrayToSort);
@@ -20,16 +17,27 @@ public class SelectionSortRealisation {
     }
 
     /**
+     * Array initialisation with random integer numbers from 1 to 1000.
+     */
+    private void initialiseArray() {
+        Random random = new Random();
+        for (int i = 0; i < arrayToSort.length; i++) {
+            arrayToSort[i] = random.nextInt(999) + 1;
+        }
+    }
+
+    /**
      * Method where Selection sorting happens
+     *
      * @param arrayToSort - array to sort
-     * */
-    public void selectionSort (int[] arrayToSort){
+     */
+    public void selectionSort(int[] arrayToSort) {
         int indexOfMinimalElement;
         int temp;
-        for (int i = 0; i < arrayToSort.length-1; i++){
+        for (int i = 0; i < arrayToSort.length - 1; i++) {
             indexOfMinimalElement = i;
-            for (int j = i+1; j < arrayToSort.length; j++){
-                if (arrayToSort[j] < arrayToSort[indexOfMinimalElement]){
+            for (int j = i + 1; j < arrayToSort.length; j++) {
+                if (arrayToSort[j] < arrayToSort[indexOfMinimalElement]) {
                     indexOfMinimalElement = j;
                 }
             }
@@ -41,9 +49,10 @@ public class SelectionSortRealisation {
 
     /**
      * Method that prints array to console
+     *
      * @param arrayToConsole - array to print
-     * */
-    private void arrayToConsole(int[] arrayToConsole){
+     */
+    private void arrayToConsole(int[] arrayToConsole) {
         for (int elementOfArray : arrayToConsole) {
             System.out.print(elementOfArray + " ");
         }
