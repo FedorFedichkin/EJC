@@ -3,10 +3,13 @@ package task_09_sort3;
 import java.util.Random;
 
 /**
- * Radix sort, LSD version.
+ * This class was made to demonstrate LSD version of radix sort in an array of 100
+ * integer elements with values generated randomly from 1 to 1000.
+ *
+ * @author Fedor Fedichkin
  */
 public class RadixSortRealisation {
-    private static int[] arrayToSort = new int[10];
+    private static int[] arrayToSort = new int[100];
 
     public static void main(String[] args) {
         RadixSortRealisation radixSortRealisation = new RadixSortRealisation();

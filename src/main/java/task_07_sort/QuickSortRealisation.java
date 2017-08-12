@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -17,7 +15,11 @@ import java.util.List;
 public class QuickSortRealisation {
     private static List<Integer> listToSort = new ArrayList<>();
 
-    public static void setListToSort(List<Integer> listToSort) {
+    static List<Integer> getListToSort() {
+        return QuickSortRealisation.listToSort;
+    }
+
+    static void setListToSort(List<Integer> listToSort) {
         QuickSortRealisation.listToSort = listToSort;
     }
 
@@ -29,27 +31,6 @@ public class QuickSortRealisation {
         quickSort(0, listToSort.size() - 1);
         System.out.println("Sorted list:");
         quickSortRealisation.printArrayListToConsole();
-    }
-
-    private List<Integer> initializeArrayList() {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            Integer valueFromConsole;
-            String enteredLine;
-            int quantityOfNumbersInArrayList = 10;
-            for (int i = 0; i < quantityOfNumbersInArrayList; i++) {
-                enteredLine = reader.readLine();
-                if (enteredLine.matches("[0-9]")) {
-                    valueFromConsole = Integer.parseInt(enteredLine);
-                    listToSort.add(valueFromConsole);
-                } else {
-                    System.out.println("The entered value is not a number. Please, try again.");
-                    quantityOfNumbersInArrayList++;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return listToSort;
     }
 
     public static void quickSort(int left, int right) {
@@ -77,6 +58,27 @@ public class QuickSortRealisation {
         }
         quickSort(left, pivot);
         quickSort(pivot + 1, right);
+    }
+
+    private List<Integer> initializeArrayList() {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+            Integer valueFromConsole;
+            String enteredLine;
+            int quantityOfNumbersInArrayList = 10;
+            for (int i = 0; i < quantityOfNumbersInArrayList; i++) {
+                enteredLine = reader.readLine();
+                if (enteredLine.matches("[0-9]")) {
+                    valueFromConsole = Integer.parseInt(enteredLine);
+                    listToSort.add(valueFromConsole);
+                } else {
+                    System.out.println("The entered value is not a number. Please, try again.");
+                    quantityOfNumbersInArrayList++;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return listToSort;
     }
 
     private void printArrayListToConsole() {

@@ -8,9 +8,8 @@ import java.util.*;
 
 public class QuickSortRealisationTest {
 
-    @Ignore
     @Test
-    public void testInsertionSort() {
+    public void testQuickSort() {
         QuickSortRealisation quickSortRealisation = new QuickSortRealisation();
 
         int[] arrayToSort = new int[100];
@@ -26,7 +25,9 @@ public class QuickSortRealisationTest {
             listToSort.add(arrayToSort[i]);
         }
 
-//        listToSort = quickSortRealisation.quickSort(0,arrayToSort.length-1);
+        QuickSortRealisation.setListToSort(listToSort);
+        QuickSortRealisation.quickSort(0, arrayToSort.length-1);
+        listToSort = QuickSortRealisation.getListToSort();
         for (int i = 0; i < listToSort.size(); i++) {
             arrayToSort[i] = listToSort.get(i);
         }
