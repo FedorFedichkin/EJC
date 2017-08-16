@@ -24,7 +24,7 @@ public class FileWriterToDisk {
                     e.printStackTrace();
                 }
             }
-        } else if (!folderWithReport.exists()) {
+        } else if (folderWithReport.exists()) {
             try {
                 reportFile.createNewFile();
             } catch (IOException e) {
