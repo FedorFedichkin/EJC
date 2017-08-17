@@ -11,7 +11,7 @@ public class FileReaderFromDisk {
         return listOfFiles;
     }
 
-    synchronized void readFilesFromDisk() throws NullPointerException {
+    void readFilesFromDisk() {
         String filePath = "EJC//src//main//java//task_11_filesparser//FolderWithCsvFiles";
         File folderWithData = new File(filePath);
         if (folderWithData.isDirectory()) {

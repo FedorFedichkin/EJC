@@ -33,7 +33,7 @@ public class CsvGenerator {
                 e.printStackTrace();
             }
             try (FileWriter writer = new FileWriter(newCsvFileName)) {
-                int numberOfLinesInFile = random.nextInt(999)+1;
+                int numberOfLinesInFile = random.nextInt(999) + 1;
                 for (int j = 0; j < numberOfLinesInFile; j++) {
                     int id = random.nextInt(Integer.MAX_VALUE);
                     int webSiteNameIndex = random.nextInt(10);

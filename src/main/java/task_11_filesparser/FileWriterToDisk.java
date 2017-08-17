@@ -10,21 +10,15 @@ import java.util.Map;
  */
 public class FileWriterToDisk {
 
-    synchronized void writeContentToFile(Map<String, Content> contentToWriteToReport) {
+    void writeContentToFile(Map<String, Content> contentToWriteToReport) {
         String filePath = "EJC//src//main//java//task_11_filesparser//Report//";
         String reportFileName = filePath + "report.csv";
         File folderWithReport = new File(filePath);
         File reportFile = new File(reportFileName);
         if (!folderWithReport.exists()) {
             folderWithReport.mkdir();
-            if (!reportFile.exists()) {
-                try {
-                    reportFile.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        } else if (folderWithReport.exists()) {
+        }
+        if (!reportFile.exists()) {
             try {
                 reportFile.createNewFile();
             } catch (IOException e) {

@@ -16,7 +16,7 @@ public class Content {
         return urlAndCorrespondingTime;
     }
 
-    void updateTimeForCorrespondingUrl(String url, long newTimeValue){
+    void updateTimeForCorrespondingUrl(String url, long newTimeValue) {
         long oldTimeValue = this.urlAndCorrespondingTime.get(url);
         this.urlAndCorrespondingTime.put(url, oldTimeValue + newTimeValue);
     }
