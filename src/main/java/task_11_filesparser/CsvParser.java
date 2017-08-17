@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentSkipListMap;
 
 /**
- *
+ * This class was written to provide possibility of multithreading during parsing of *.csv files.
  */
 public class CsvParser implements Runnable {
     private Map<String, Content> userNamesAndCorrespondingContent;
@@ -16,6 +16,13 @@ public class CsvParser implements Runnable {
         this.file = file;
     }
 
+    /**
+     * This method reads the content from a file stored in private field of a class, parses it
+     * and saves the output content to the private field userNamesAndCorrespondingContent that
+     * holds user names as keys (sorted in alphabetic order) and Content objects as values.
+     * The latter has the only field urlAndCorrespondingTime that is also a concurrentSkipListMap
+     * with url as keys (also sorted in alphabetic order) and time as values.
+     */
     @Override
     public void run() {
         try (BufferedReader reader = new BufferedReader(new FileReader(file.getAbsoluteFile()))) {

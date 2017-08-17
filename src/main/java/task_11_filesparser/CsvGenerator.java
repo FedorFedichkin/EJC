@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.util.Random;
 
 /**
- *
+ * This class generates 10 *.csv files. Each line of generated file has
+ * id (int), url (String), time (int) and name (String) separated by
+ * delimiter ";".
  */
 public class CsvGenerator {
     private final String[] webSiteNames = new String[]{"https://habrahabr.ru/", "https://stackoverflow.com/",
@@ -21,7 +23,9 @@ public class CsvGenerator {
         Random random = new Random();
         int numberOfFiles = 10;
         for (int i = 1; i < numberOfFiles + 1; i++) {
-            String newCsvFileName = filePath + "FileName" + i + ".csv";
+            String fileName = "FileName" + i + ".csv";
+            String newCsvFileName = filePath + fileName;
+            System.out.println(fileName + " is created");
             File folderWithCsvFiles = new File(filePath);
             File newCsvFile = new File(newCsvFileName);
             if (!folderWithCsvFiles.exists()) {
@@ -33,11 +37,12 @@ public class CsvGenerator {
                 e.printStackTrace();
             }
             try (FileWriter writer = new FileWriter(newCsvFileName)) {
+                writer.write("id;url;time;user\r\n");
                 int numberOfLinesInFile = random.nextInt(999) + 1;
-                for (int j = 0; j < numberOfLinesInFile; j++) {
+                for (int j = 1; j < numberOfLinesInFile; j++) {
                     int id = random.nextInt(Integer.MAX_VALUE);
                     int webSiteNameIndex = random.nextInt(10);
-                    long timeSpentOnWebSite = random.nextInt(Integer.MAX_VALUE);
+                    int timeSpentOnWebSite = random.nextInt(Integer.MAX_VALUE);
                     int userNameIndex = random.nextInt(10);
                     String currentUserName = userNames[userNameIndex];
                     String currentWebSite = webSiteNames[webSiteNameIndex];
